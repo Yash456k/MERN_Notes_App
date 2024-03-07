@@ -1,16 +1,21 @@
-const CreateNoteForm = ({ createNote, createForm, updateCreateFormField }) => {
+import notesStore from "../stores/notesStore";
+
+const CreateNoteForm = () => {
+  const store = notesStore();
+  if (store.updateForm._id) return <></>;
+
   return (
     <div>
       <h3>create note</h3>
-      <form onSubmit={createNote}>
+      <form onSubmit={store.createNote}>
         <input
-          onChange={updateCreateFormField}
-          value={createForm.title}
+          onChange={store.updateCreateFormField}
+          value={store.createForm.title}
           name="title"
         />
         <textarea
-          onChange={updateCreateFormField}
-          value={createForm.body}
+          onChange={store.updateCreateFormField}
+          value={store.createForm.body}
           name="body"
         />
         <button type="submit">Create Note</button>

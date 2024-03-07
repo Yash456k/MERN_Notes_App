@@ -1,16 +1,15 @@
-const Notes = ({ notes, deleteNote, toggleNote }) => {
+import notesStore from "../stores/notesStore";
+import Note from "./Note";
+
+const Notes = () => {
+  const store = notesStore();
+
   return (
     <div>
       <h1>Notes</h1>
-      {notes &&
-        notes.map((note) => {
-          return (
-            <div key={note._id}>
-              <h3>{note.title}</h3>
-              <button onClick={() => deleteNote(note._id)}>Delete</button>
-              <button onClick={() => toggleNote(note)}>Update Note</button>
-            </div>
-          );
+      {store.notes &&
+        store.notes.map((note) => {
+          return <Note note={note} key={note._id} />;
         })}
     </div>
   );

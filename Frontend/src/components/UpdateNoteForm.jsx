@@ -1,18 +1,21 @@
-import React from "react";
+import notesStore from "../stores/notesStore";
 
-const updateNoteForm = ({ updateNote, updateFieldChange, updateForm }) => {
+const updateNoteForm = () => {
+  const store = notesStore();
+  if (!store.updateForm._id) return <></>;
+
   return (
     <div>
       <h3>update note</h3>
-      <form onSubmit={updateNote}>
+      <form onSubmit={store.updateNote}>
         <input
-          onChange={updateFieldChange}
-          value={updateForm.title}
+          onChange={store.updateFieldChange}
+          value={store.updateForm.title}
           name="title"
         />
         <textarea
-          onChange={updateFieldChange}
-          value={updateForm.body}
+          onChange={store.updateFieldChange}
+          value={store.updateForm.body}
           name="body"
         />
         <button type="submit">Update Note</button>
