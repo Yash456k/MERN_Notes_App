@@ -31,16 +31,16 @@ app.use(
   })
 );
 
-app.get("/signup", handleSignup);
-app.get("/login", handleLogin);
-app.get("/check", requireAuth, checkAuth);
+app.post("/signup", handleSignup);
+app.post("/login", handleLogin);
+app.get("/checkAuth", requireAuth, checkAuth);
 app.get("/logout", handleLogout);
 
-app.get("/notes", displayAllNotes);
-app.get("/notes/:id", findNoteById);
-app.put("/notes/:id", changeNoteById);
-app.post("/notes", createNote);
-app.delete("/notes/:id", deleteNoteById);
+app.get("/notes", requireAuth, displayAllNotes);
+app.get("/notes/:id", requireAuth, findNoteById);
+app.put("/notes/:id", requireAuth, changeNoteById);
+app.post("/notes", requireAuth, createNote);
+app.delete("/notes/:id", requireAuth, deleteNoteById);
 
 app.listen(process.env.PORT, () => {
   console.log(`server running on ${process.env.PORT}`);

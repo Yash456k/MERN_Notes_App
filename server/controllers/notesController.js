@@ -1,51 +1,79 @@
 const Note = require("../models/Note.js");
 
 async function displayAllNotes(req, res) {
-  const note = await Note.find();
-  res.json({
-    note,
-  });
+  try {
+    const note = await Note.find({ user: req.user._id });
+    res.json({
+      note,
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
 }
 
 const findNoteById = async (req, res) => {
-  const id = req.params.id;
+  try {
+    const id = req.params.id;
 
-  const note = await Note.findById(id);
+    const note = await Note.findOne({ _id: id, user: req.user._id });
 
-  res.json({
-    note,
-  });
+    res.json({
+      note,
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
 };
 
 const changeNoteById = async (req, res) => {
-  const { title, body } = req.body;
-  const id = req.params.id;
+  try {
+    const { title, body } = req.body;
+    const id = req.params.id;
 
-  await Note.findByIdAndUpdate(id, { title, body });
+    await Note.findOneAndUpdate(
+      { _id: id, user: req.user._id },
+      { title, body }
+    );
 
-  const note = await Note.findById(id);
+    const note = await Note.findById(id);
 
-  res.json({ note });
+    res.json({ note });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
 };
 
 const createNote = async (req, res) => {
-  const { title, body } = req.body;
+  try {
+    const { title, body } = req.body;
 
-  const note = await Note.create({ title, body });
+    const note = await Note.create({ title, body, user: req.user._id });
 
-  res.json({
-    note,
-  });
+    res.json({
+      note,
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
 };
 
 const deleteNoteById = async (req, res) => {
-  const id = req.params.id;
+  try {
+    const id = req.params.id;
 
-  const note = await Note.findByIdAndDelete(id);
+    const note = await Note.deleteOne({ _id: id, user: req.user._id });
 
-  res.json({
-    note,
-  });
+    res.json({
+      note,
+    });
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
 };
 
 module.exports = {

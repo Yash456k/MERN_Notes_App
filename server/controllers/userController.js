@@ -28,12 +28,17 @@ const handleLogin = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    if (!user) return res.sendStatus(401);
+    if (!user) {
+      console.log("no user");
+      return res.sendStatus(401);
+    }
 
     const checkPassword = await bcrypt.compare(password, user.password);
 
-    if (!checkPassword) return res.sendStatus(401);
-
+    if (!checkPassword) {
+      console.log("wrong pass");
+      return res.sendStatus(401);
+    }
     const exp = Date.now() + 1000 * 60 * 60 * 24 * 30;
 
     const auth = jwt.sign({ sub: user._id, exp }, process.env.SECRET);

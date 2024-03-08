@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const notesStore = create((set, get) => ({
+const notesStore = create((set) => ({
   notes: null,
   createForm: {
     title: "",
@@ -13,7 +13,7 @@ const notesStore = create((set, get) => ({
     body: "",
   },
   fetchNotes: async () => {
-    const res = await axios.get("http://localhost:3000/notes");
+    const res = await axios.get("/notes");
     console.log("fetch called");
 
     set({
@@ -37,7 +37,7 @@ const notesStore = create((set, get) => ({
   createNote: async (e) => {
     e.preventDefault();
     const { notes, createForm } = notesStore.getState();
-    const res = await axios.post("http://localhost:3000/notes", createForm);
+    const res = await axios.post("/notes", createForm);
 
     set({
       notes: [...notes, res.data.note],
@@ -49,7 +49,7 @@ const notesStore = create((set, get) => ({
   },
 
   deleteNote: async (_id) => {
-    const res = await axios.delete(`http://localhost:3000/notes/${_id}`);
+    const res = await axios.delete(`/notes/${_id}`);
     const { notes } = notesStore.getState();
 
     const newNotes = [...notes].filter((note) => {
@@ -85,7 +85,7 @@ const notesStore = create((set, get) => ({
       updateForm: { title, body, _id },
     } = notesStore.getState();
 
-    const res = await axios.put(`http://localhost:3000/notes/${_id}`, {
+    const res = await axios.put(`/notes/${_id}`, {
       title,
       body,
     });
