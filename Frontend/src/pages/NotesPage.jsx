@@ -11,10 +11,10 @@ const NotesPage = () => {
   }, []);
   return (
     <div>
-      <div>
-        <Notes />
+      <div className="flex flex-col justify-center items-center">
         <UpdateNoteForm />
         <CreateNoteForm />
+        <Notes />
       </div>
     </div>
   );

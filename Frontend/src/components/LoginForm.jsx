@@ -14,7 +14,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-full flex justify-center align-center p-4">
+    <div className="w-full flex justify-center  p-4">
       <form onSubmit={handleLogin} className="flex flex-col">
         <input
           onChange={store.updateLoginForm}

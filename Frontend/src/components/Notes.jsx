@@ -5,12 +5,14 @@ const Notes = () => {
   const store = notesStore();
 
   return (
-    <div>
-      <h1>Notes</h1>
-      {store.notes &&
-        store.notes.map((note) => {
-          return <Note note={note} key={note._id} />;
-        })}
+    <div className="flex flex-col w-full ">
+      <h1 className="text-3xl mx-2 my-6"> Your Notes</h1>
+      <div className="flex flex-wrap justify-center md:justify-start items-start md:ml-20 gap-16">
+        {store.notes &&
+          store.notes.map((note) => {
+            return <Note note={note} key={note._id} />;
+          })}
+      </div>
     </div>
   );
 };

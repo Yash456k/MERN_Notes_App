@@ -55,14 +55,16 @@ const authStore = create((set) => ({
   },
 
   signup: async () => {
-    const { signupForm, login } = authStore.getState();
+    const { signupForm } = authStore.getState();
 
     const res = await axios.post("/signup", signupForm);
     console.log(res);
 
-    await axios.post("/login", signupForm);
+    const res1 = await axios.post("/login", signupForm);
+    console.log(res1);
 
     set({
+      loggedIn: true,
       signupForm: {
         email: "",
         password: "",
@@ -78,7 +80,7 @@ const authStore = create((set) => ({
     } catch (error) {
       set({ loggedIn: false });
       console.log("error in checkAUth");
-      console.log(err);
+      console.log(error);
     }
   },
 
