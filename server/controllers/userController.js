@@ -39,7 +39,7 @@ const handleLogin = async (req, res) => {
       console.log("wrong pass");
       return res.sendStatus(401);
     }
-    const exp = Date.now() + 1000 * 60 * 60 * 24 * 30;
+    const exp = Date.now() + 1000 * 60 * 60 * 2;
 
     const auth = jwt.sign({ sub: user._id, exp }, process.env.SECRET);
 
