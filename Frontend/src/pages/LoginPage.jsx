@@ -9,7 +9,6 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(store.loggedIn);
     if (store.loggedIn === true) {
       navigate("/");
     }

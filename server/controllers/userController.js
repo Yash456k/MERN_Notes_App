@@ -18,7 +18,6 @@ const handleSignup = async (req, res) => {
     await User.create({ email, password: hashedPassword });
     res.sendStatus(200);
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 };
@@ -29,14 +28,12 @@ const handleLogin = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      console.log("no user");
       return res.sendStatus(401);
     }
 
     const checkPassword = await bcrypt.compare(password, user.password);
 
     if (!checkPassword) {
-      console.log("wrong pass");
       return res.sendStatus(401);
     }
     const exp = Date.now() + 1000 * 60 * 60 * 2;
@@ -50,12 +47,8 @@ const handleLogin = async (req, res) => {
       secure: true,
     });
 
-    console.log("attempted login and created cookie for : ");
-    console.log(email);
-
     return res.sendStatus(200);
   } catch (error) {
-    console.log(error);
     res.send("inside try catch").sendStatus(400);
   }
 };

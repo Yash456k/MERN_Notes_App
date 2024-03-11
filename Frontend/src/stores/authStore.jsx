@@ -43,7 +43,6 @@ const authStore = create((set) => ({
     const { loginForm } = authStore.getState();
 
     const res = await axios.post("/login", loginForm);
-    console.log(res);
 
     set({
       loggedIn: true,
@@ -58,10 +57,8 @@ const authStore = create((set) => ({
     const { signupForm } = authStore.getState();
 
     const res = await axios.post("/signup", signupForm);
-    console.log(res);
 
     const res1 = await axios.post("/login", signupForm);
-    console.log(res1);
 
     set({
       loggedIn: true,
@@ -79,8 +76,6 @@ const authStore = create((set) => ({
       set({ loggedIn: true });
     } catch (error) {
       set({ loggedIn: false });
-      console.log("error in checkAUth");
-      console.log(error);
     }
   },
 

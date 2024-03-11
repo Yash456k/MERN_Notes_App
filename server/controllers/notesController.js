@@ -7,7 +7,6 @@ async function displayAllNotes(req, res) {
       note,
     });
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 }
@@ -22,7 +21,6 @@ const findNoteById = async (req, res) => {
       note,
     });
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 };
@@ -41,7 +39,6 @@ const changeNoteById = async (req, res) => {
 
     res.json({ note });
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 };
@@ -56,7 +53,6 @@ const createNote = async (req, res) => {
       note,
     });
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 };
@@ -71,7 +67,6 @@ const deleteNoteById = async (req, res) => {
       note,
     });
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 };
