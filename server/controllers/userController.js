@@ -49,7 +49,8 @@ const handleLogin = async (req, res) => {
 
     return res.sendStatus(200);
   } catch (error) {
-    res.send("inside try catch").sendStatus(400);
+    console.log(error);
+    res.sendstatus(401);
   }
 };
 
