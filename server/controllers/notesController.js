@@ -3,10 +3,14 @@ const Note = require("../models/Note.js");
 async function displayAllNotes(req, res) {
   try {
     const note = await Note.find({ user: req.user._id });
+    console.log("notes called");
+    console.log("notes :");
+    console.log(note);
     res.json({
       note,
     });
   } catch (err) {
+    console.log("error in display all notes");
     res.sendStatus(400);
   }
 }
