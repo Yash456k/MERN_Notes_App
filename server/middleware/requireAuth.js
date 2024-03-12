@@ -4,9 +4,11 @@ require("dotenv").config();
 
 async function requireAuth(req, res, next) {
   try {
+    console.log("inside the require auth");
     const token = req.cookies.Auth;
 
     if (!token) {
+      console.log(token);
       console.log("no token");
       return res.sendStatus(401);
     }
