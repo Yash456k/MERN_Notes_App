@@ -43,8 +43,6 @@ const handleLogin = async (req, res) => {
     res.cookie("Auth", auth, {
       maxAge: new Date(exp),
       httpOnly: true,
-      sameSite: "lax",
-      secure: true,
     });
 
     return res.sendStatus(200);
