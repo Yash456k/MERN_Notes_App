@@ -37,6 +37,9 @@ app.get("/checkAuth", requireAuth, checkAuth);
 app.get("/logout", handleLogout);
 
 app.get("/notes", requireAuth, displayAllNotes);
+app.get("/", (req, res) => {
+  console.log(req.cookies);
+});
 app.get("/notes/:id", requireAuth, findNoteById);
 app.put("/notes/:id", requireAuth, changeNoteById);
 app.post("/notes", requireAuth, createNote);

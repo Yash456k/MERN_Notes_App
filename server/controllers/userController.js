@@ -43,7 +43,9 @@ const handleLogin = async (req, res) => {
     res.cookie("Auth", auth, {
       maxAge: new Date(exp),
       httpOnly: true,
-      sameSite: "none",
+      domain: "https://mern-notes-app-2k2f.onrender.com",
+      //  sameSite: "none",
+      // secure: false,
     });
 
     res.sendStatus(200);
