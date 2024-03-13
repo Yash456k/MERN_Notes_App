@@ -45,7 +45,7 @@ const handleLogin = async (req, res) => {
       httpOnly: true,
     });
 
-    return res.sendStatus(200);
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     res.sendstatus(401);

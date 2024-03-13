@@ -13,7 +13,16 @@ const notesStore = create((set) => ({
     body: "",
   },
   fetchNotes: async () => {
-    const res = await axios.get("/notes");
+    const api = axios.create({
+      baseURL: "http://localhost:3000", // Replace with your API base URL
+      withCredentials: true, // Enable sending and receiving cookies
+      headers: {
+        "Content-Type": "application/json", // Example of setting a custom header
+        // Add other custom headers if needed
+      },
+    });
+
+    const res = await api.get("/notes");
 
     set({
       notes: res.data.note,
