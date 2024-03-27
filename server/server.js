@@ -24,12 +24,7 @@ connectToDatabase();
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:5173",
-  })
-);
+app.use(cors());
 
 app.post("/signup", handleSignup);
 app.post("/login", handleLogin);
