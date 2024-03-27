@@ -10,7 +10,7 @@ const SignupForm = () => {
 
     await store.signup();
 
-    navigate("/");
+    navigate("/login");
   };
 
   return (

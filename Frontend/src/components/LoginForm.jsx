@@ -1,5 +1,4 @@
 import authStore from "../stores/authStore";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 

@@ -54,9 +54,7 @@ const authStore = create((set) => ({
   signup: async () => {
     const { signupForm } = authStore.getState();
     const res = await axios.post("/signup", signupForm);
-    const res1 = await axios.post("/login", signupForm);
     set({
-      loggedIn: true,
       signupForm: {
         email: "",
         password: "",
