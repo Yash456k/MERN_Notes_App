@@ -3,11 +3,13 @@ import UpdateNoteForm from "../components/UpdateNoteForm";
 import CreateNoteForm from "../components/CreateNoteForm";
 import notesStore from "../stores/notesStore";
 import { useEffect } from "react";
+import authStore from "../stores/authStore";
 
 const NotesPage = () => {
+  const authstore = authStore();
   const store = notesStore();
   useEffect(() => {
-    store.fetchNotes();
+    store.fetchNotes(authstore.loginCookie);
   }, []);
   return (
     <div>

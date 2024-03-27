@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import authStore from "./authStore";
 
 const notesStore = create((set) => ({
   notes: null,
@@ -12,8 +13,12 @@ const notesStore = create((set) => ({
     title: "",
     body: "",
   },
-  fetchNotes: async () => {
-    const res = await axios.get("/notes");
+  fetchNotes: async (cookie) => {
+    const res = await axios.get("/notes", {
+      headers: {
+        authorization: cookie,
+      },
+    });
 
     set({
       notes: res.data.note,
