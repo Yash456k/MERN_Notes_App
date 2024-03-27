@@ -6,6 +6,7 @@ import "./index.css";
 
 axios.defaults.baseURL = "https://mern-notes-app-2k2f.onrender.com";
 axios.defaults.withCredentials = true;
+
 // https://mern-notes-app-2k2f.onrender.com
 // http://localhost:3000
 

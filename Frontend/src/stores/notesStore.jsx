@@ -4,6 +4,7 @@ import authStore from "./authStore";
 
 const notesStore = create((set) => ({
   notes: null,
+  authCookie: null,
   createForm: {
     title: "",
     body: "",
@@ -12,6 +13,11 @@ const notesStore = create((set) => ({
     _id: null,
     title: "",
     body: "",
+  },
+  updateCookie: (cookie) => {
+    set({
+      authCookie: cookie,
+    });
   },
   fetchNotes: async (cookie) => {
     const res = await axios.get("/notes", {
@@ -40,8 +46,12 @@ const notesStore = create((set) => ({
 
   createNote: async (e) => {
     e.preventDefault();
-    const { notes, createForm } = notesStore.getState();
-    const res = await axios.post("/notes", createForm);
+    const { notes, createForm, authCookie } = notesStore.getState();
+    const res = await axios.post("/notes", createForm, {
+      headers: {
+        authorization: authCookie,
+      },
+    });
 
     set({
       notes: [...notes, res.data.note],
@@ -53,7 +63,12 @@ const notesStore = create((set) => ({
   },
 
   deleteNote: async (_id) => {
-    const res = await axios.delete(`/notes/${_id}`);
+    const { authCookie } = notesStore.getState();
+    const res = await axios.delete(`/notes/${_id}`, {
+      headers: {
+        authorization: authCookie,
+      },
+    });
     const { notes } = notesStore.getState();
 
     const newNotes = [...notes].filter((note) => {
@@ -87,12 +102,21 @@ const notesStore = create((set) => ({
     const {
       notes,
       updateForm: { title, body, _id },
+      authCookie,
     } = notesStore.getState();
 
-    const res = await axios.put(`/notes/${_id}`, {
-      title,
-      body,
-    });
+    const res = await axios.put(
+      `/notes/${_id}`,
+      {
+        title,
+        body,
+      },
+      {
+        headers: {
+          authorization: authCookie,
+        },
+      }
+    );
 
     const newNotes = [...notes];
     const noteIndex = notes.findIndex((note) => {

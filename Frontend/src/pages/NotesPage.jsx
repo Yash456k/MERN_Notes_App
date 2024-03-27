@@ -10,6 +10,7 @@ const NotesPage = () => {
   const store = notesStore();
   useEffect(() => {
     store.fetchNotes(authstore.loginCookie);
+    store.updateCookie(authstore.loginCookie);
   }, []);
   return (
     <div>
