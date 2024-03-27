@@ -1,16 +1,24 @@
 import authStore from "../stores/authStore";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const LoginForm = () => {
   const store = authStore();
   const navigate = useNavigate();
+  const [_, setCookies] = useCookies(["Auth"]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    await store.login();
-
-    navigate("/");
+    try {
+      const authToken = await store.login(); // Wait for the Promise to resolve
+      setCookies("Auth", authToken); // Update the auth token cookie
+      navigate("/"); // Redirect to the desired page
+    } catch (error) {
+      console.error(error);
+      // Handle the login error
+    }
   };
 
   return (

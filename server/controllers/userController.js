@@ -39,16 +39,9 @@ const handleLogin = async (req, res) => {
     const exp = Date.now() + 1000 * 60 * 60 * 2;
 
     const auth = jwt.sign({ sub: user._id, exp }, process.env.SECRET);
+    console.log(auth);
 
-    res.cookie("Auth", auth, {
-      maxAge: new Date(exp),
-      httpOnly: true,
-      domain: "https://mern-notes-app-2k2f.onrender.com",
-      //  sameSite: "none",
-      // secure: false,
-    });
-
-    res.sendStatus(200);
+    res.json({ auth, userID: user._id });
   } catch (error) {
     console.log(error);
     res.sendstatus(401);
