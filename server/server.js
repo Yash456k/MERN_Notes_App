@@ -27,10 +27,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "https://yash456k-basic-notes-mern-app.netlify.app",
-      "http://localhost:5173",
-    ],
+    origin: ["https://yash456k-basic-notes-mern-app.netlify.app"],
   })
 );
 
