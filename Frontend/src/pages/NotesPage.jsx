@@ -8,9 +8,15 @@ import authStore from "../stores/authStore";
 const NotesPage = () => {
   const authstore = authStore();
   const store = notesStore();
+
   useEffect(() => {
-    store.fetchNotes(authstore.loginCookie);
-    store.updateCookie(authstore.loginCookie);
+    async function fetchData() {
+      console.log(authstore.loginCookie);
+      await store.fetchNotes(authstore.loginCookie);
+      await store.updateCookie(authstore.loginCookie);
+    }
+    console.log(authstore.loginCookie);
+    fetchData();
   }, []);
   return (
     <div>

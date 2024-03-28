@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
 const authStore = create((set) => ({
   loggedIn: null,
@@ -62,14 +61,18 @@ const authStore = create((set) => ({
     });
   },
   checkAuth: async () => {
-    const { loginCookie } = authStore.getState();
+    const { loginCookie, loggedIn } = authStore.getState();
     try {
+      console.log("inside checkAuth frontend");
+      console.log(loginCookie);
       await axios.get("/checkAuth", {
         headers: {
           authorization: loginCookie,
         },
       }),
         set({ loggedIn: true });
+      console.log("loggedIn : ");
+      console.log(loggedIn);
     } catch (error) {
       set({ loggedIn: false });
     }

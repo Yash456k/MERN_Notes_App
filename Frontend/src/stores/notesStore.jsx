@@ -19,6 +19,7 @@ const notesStore = create((set) => ({
     });
   },
   fetchNotes: async (cookie) => {
+    console.log(cookie);
     const res = await axios.get("/notes", {
       headers: {
         authorization: cookie,
