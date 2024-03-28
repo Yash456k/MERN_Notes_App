@@ -50,7 +50,6 @@ const handleLogin = async (req, res) => {
 
 const handleLogout = async (req, res) => {
   try {
-    res.cookie("Auth", "", { maxAge: 0 });
     req.user = null;
     res.sendStatus(200);
   } catch (error) {

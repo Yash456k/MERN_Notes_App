@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import axios from "axios";
-import authStore from "./authStore";
 
 const notesStore = create((set) => ({
   notes: null,

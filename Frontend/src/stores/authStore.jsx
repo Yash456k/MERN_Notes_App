@@ -62,16 +62,32 @@ const authStore = create((set) => ({
     });
   },
   checkAuth: async () => {
+    const { loginCookie } = authStore.getState();
     try {
-      await axios.get("/checkAuth");
-      set({ loggedIn: true });
+      await axios.get("/checkAuth", {
+        headers: {
+          authorization: loginCookie,
+        },
+      }),
+        set({ loggedIn: true });
     } catch (error) {
       set({ loggedIn: false });
     }
   },
   logout: async () => {
     await axios.get("/logout");
-    set({ loggedIn: false });
+    set({
+      loggedIn: false,
+      loginCookie: null,
+      loginForm: {
+        email: "",
+        password: "",
+      },
+      signupForm: {
+        email: "",
+        password: "",
+      },
+    });
   },
 }));
 
