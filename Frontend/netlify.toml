@@ -2,4 +2,3 @@
   from = "/*"
   to = "https://yash456k-basic-notes-mern-app.netlify.app"
   status = 200
-  force = true
