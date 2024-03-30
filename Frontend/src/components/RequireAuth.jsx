@@ -16,7 +16,12 @@ const RequireAuth = (props) => {
   }, []);
 
   if (store.loggedIn === null) {
-    return <div>loading</div>;
+    return (
+      <div>
+        .... Please wait , the backend is hosted on render's , which goes to
+        sleep often ...
+      </div>
+    );
   }
   if (store.loggedIn === false) return <Navigate to="/login" />;
 
